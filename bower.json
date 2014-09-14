@@ -1,0 +1,29 @@
+{
+    "name": "ember-twbs-pagination",
+    "version": "0.1.0",
+    "description": "Ember.js Component for Bootstrap 3 pagination",
+    "authors": [
+        "k3nsei <k3nsei.pl@gmail.com>"
+    ],
+    "main": "dist/ember-twbs-pagination.js",
+    "keywords": [
+        "pagination",
+        "bootstrap",
+        "bootstrap3",
+        "twbs",
+        "twbs3",
+        "ember.js",
+        "emberjs",
+        "ember",
+        "component"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/k3nsei/ember-twbs-pagination",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}

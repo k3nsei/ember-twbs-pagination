@@ -1,0 +1,42 @@
+{
+  "name": "ember-twbs-pagination",
+  "version": "0.1.0",
+  "description": "Ember.js Component for Bootstrap 3 pagination",
+  "main": "dist/ember-twbs-pagination.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k3nsei/ember-twbs-pagination.git"
+  },
+  "keywords": [
+    "pagination",
+    "bootstrap",
+    "bootstrap3",
+    "twbs",
+    "twbs3",
+    "ember.js",
+    "emberjs",
+    "ember",
+    "component"
+  ],
+  "author": "k3nsei <k3nsei.pl@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k3nsei/ember-twbs-pagination/issues"
+  },
+  "homepage": "https://github.com/k3nsei/ember-twbs-pagination",
+  "devDependencies": {
+    "ember-handlebars": "^1.2.0",
+    "gulp": "^3.8.8",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.4.0",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^2.2.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1",
+    "gulp-wrap": "^0.3.0",
+    "mocha": "^1.21.4"
+  }
+}
