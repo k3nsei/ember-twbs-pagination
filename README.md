@@ -46,6 +46,7 @@ Install via Bower, `bower install ember-twbs-pagination --save`, then include in
 
 ### Available Options
 - `pager` -- Switches to the pager component, defaults to `false`
+- `hide` -- Hide the component if `count` equals 1, defaults to `false`
 
 #### Required
 - `count` -- The number of pages in total, required
