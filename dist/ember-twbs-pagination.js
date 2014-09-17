@@ -5,9 +5,9 @@ var emberTwbsPaginationController = Ember.ObjectController.extend({
     }.property('content', 'parentController.current'),
 
     isDots: function () {
-        console.log(this.get('paginationDots'));
+        console.log('dupa_a');
         return this.get('content') === '…';
-    }.property('content', 'paginationDots'),
+    }.property('content'),
 
     actions: {
         setCurrent: function () {
@@ -18,18 +18,25 @@ var emberTwbsPaginationController = Ember.ObjectController.extend({
 
 var emberTwbsPaginationComponent = Ember.Component.extend({
     tagName: 'ul',
-    classNameBindings: ['pager:pager:pagination', 'paginationSizeClass'],
+    classNameBindings: ['pager:pager:pagination', 'isHidden:hidden', 'paginationSizeClass'],
     pager: false,
+    hide: false,
     pagerNext: 'Next',
     pagerPrevious: 'Previous',
     paginationPrevious: '«',
     paginationNext: '»',
-    paginationDots: '…',
     countOut: 2,
     countIn: 2,
     firstPage: 1,
     current: 1,
     lastPage: Ember.computed.alias('count'),
+
+    isHidden: function () {
+        if (this.get('hide')) {
+            return (this.get('current') === this.get('count'));
+        }
+        return false;
+    }.property('hide', 'current', 'count'),
 
     currentPage: function () {
         return Number(this.get('current'));
@@ -43,11 +50,11 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
     }.property('paginationSize'),
 
     isFirst: function () {
-        return this.get('current') == this.get('firstPage');
+        return this.get('current') === this.get('firstPage');
     }.property('firstPage', 'current'),
 
     isLast: function () {
-        return this.get('current') == this.get('lastPage');
+        return this.get('current') === this.get('lastPage');
     }.property('lastPage', 'current'),
 
     pages: function () {
@@ -77,30 +84,29 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
         var use_n6 = (use_middle && ((n7 - n5) > 1));
 
         var links = [];
-
         // Generate links data in accordance with calculated numbers
-        for (var i = n1; i <= n2; i++) {
-            links[i] = i;
+        if (count > 1) {
+            for (var i = n1; i <= n2; i++) {
+                result.push(i);
+            }
+            if (use_n3 === true) {
+                result.push('…');
+            }
+            for (i = n4; i <= n5; i++) {
+                result.push(i);
+            }
+            if (use_n6 === true) {
+                result.push('…');
+            }
+            for (i = n7; i <= n8; i++) {
+                result.push(i);
+            }
+        } else {
+            result.push(1);
         }
-        if (use_n3 === true) {
-            links[n3] = '…';
-        }
-        for (i = n4; i <= n5; i++) {
-            links[i] = i;
-        }
-        if (use_n6 === true) {
-            links[n6] = this.get('paginationDots');
-        }
-        for (i = n7; i <= n8; i++) {
-            links[i] = i;
-        }
-
-        links.forEach(function (content, number) {
-            result.push( content );
-        });
 
         return result;
-    }.property('count', 'current', 'countOut', 'countIn', 'paginationDots'),
+    }.property('count', 'current', 'countOut', 'countIn'),
 
     click: function (event) {
         // stop `#` from jumping to top of page

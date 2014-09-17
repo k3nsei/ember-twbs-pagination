@@ -52,6 +52,8 @@ Install via Bower, `bower install ember-twbs-pagination --save`, then include in
 - `current` -- The current page number, required
 
 #### Pagination Only
+- `countOut` -- The number of page links in the begin and end of whole range
+- `countIn` -- The number of page links on each side of current page
 - `paginationNext` -- The text to display for pagination next button
 - `paginationPrevious` -- The text to display for pagination previous button
 - `paginationSize` -- The size of the element, default is '', available options include `lg` and `sm`.
