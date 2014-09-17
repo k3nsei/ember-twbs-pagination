@@ -4,7 +4,6 @@ var emberTwbsPaginationController = Ember.ObjectController.extend({
     }.property('content', 'parentController.current'),
 
     isDots: function () {
-        console.log('dupa_a');
         return this.get('content') === '…';
     }.property('content'),
 

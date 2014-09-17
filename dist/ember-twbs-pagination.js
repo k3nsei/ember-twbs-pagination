@@ -5,7 +5,6 @@ var emberTwbsPaginationController = Ember.ObjectController.extend({
     }.property('content', 'parentController.current'),
 
     isDots: function () {
-        console.log('dupa_a');
         return this.get('content') === '…';
     }.property('content'),
 
@@ -33,10 +32,10 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
 
     isHidden: function () {
         if (this.get('hide')) {
-            return (this.get('current') === this.get('count'));
+            return (this.get('count') === 1);
         }
         return false;
-    }.property('hide', 'current', 'count'),
+    }.property('hide', 'count'),
 
     currentPage: function () {
         return Number(this.get('current'));
@@ -59,20 +58,22 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
 
     pages: function () {
         var count = this.get('count'),
-            result = [],
-            i = 1;
+            current = this.get('current'),
+            countOut = this.get('countOut'),
+            countIn = this.get('countIn'),
+            result = [];
 
         // Beginning group of pages: n1...n2
         var n1 = 1;
-        var n2 = Math.min(this.get('countOut'), 10);
+        var n2 = Math.min(countOut, count);
 
         // Ending group of pages: n7...n8
-        var n7 = Math.max(1, (this.get('count') - this.get('countOut') + 1));
-        var n8 = this.get('count');
+        var n7 = Math.max(1, (count - countOut + 1));
+        var n8 = count;
 
         // Middle group of pages: n4...n5
-        var n4 = Math.max(n2 + 1, this.get('current') - this.get('countIn'));
-        var n5 = Math.min(n7 - 1, this.get('current') + this.get('countIn'));
+        var n4 = Math.max(n2 + 1, current - countIn);
+        var n5 = Math.min(n7 - 1, current + countIn);
         var use_middle = (n5 >= n4);
 
         // Point n3 between n2 and n4
@@ -86,24 +87,31 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
         var links = [];
         // Generate links data in accordance with calculated numbers
         if (count > 1) {
-            for (var i = n1; i <= n2; i++) {
-                result.push(i);
+            for (i = n1; i <= n2; i++) {
+                links[i] = i;
             }
             if (use_n3 === true) {
-                result.push('…');
+                links[n3] = '…';
             }
             for (i = n4; i <= n5; i++) {
-                result.push(i);
+                links[i] = i;
             }
             if (use_n6 === true) {
-                result.push('…');
+                links[n6] = '…';
             }
             for (i = n7; i <= n8; i++) {
-                result.push(i);
+                links[i] = i;
             }
         } else {
             result.push(1);
         }
+
+        links.forEach(function(x, y) {
+            // Double check to be sure
+            if(y >= 1 && y <= count) {
+                result.push(x);
+            }
+        });
 
         return result;
     }.property('count', 'current', 'countOut', 'countIn'),
