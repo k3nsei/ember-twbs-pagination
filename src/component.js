@@ -44,7 +44,8 @@ var emberTwbsPaginationComponent = Ember.Component.extend({
             current = this.get('current'),
             countOut = this.get('countOut'),
             countIn = this.get('countIn'),
-            result = [];
+            result = [],
+            i = 0;
 
         // Beginning group of pages: n1...n2
         var n1 = 1;
